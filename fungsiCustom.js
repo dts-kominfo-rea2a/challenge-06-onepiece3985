@@ -20,6 +20,7 @@ let modifyFile3 = (val) => {
 // gunakan variabel file1, file2, dan file3
 const bacaData = (fungsinya)=>{
   const fs = require('fs');
+  let masalah=[];
   let tampung=[];
   let darifile=[];
   const kataKedua=(katakata)=>{
@@ -28,17 +29,20 @@ const bacaData = (fungsinya)=>{
   }
   fs.readFile(file1,"utf-8",(err,data)=>{
     darifile=JSON.parse(data);
+    masalah.push(err);
     tampung.push(kataKedua(darifile.message));
   });
   fs.readFile(file2,"utf-8",(err,data)=>{
     darifile=JSON.parse(data);
+    masalah.push(err);
     tampung.push(kataKedua(darifile[0].message));
   });
   fs.readFile(file3,"utf-8",(err,data)=>{
     darifile=JSON.parse(data);
+    masalah.push(err);
     tampung.push(kataKedua(darifile[0].data.message));
   });
-  fungsinya(err, tampung);
+  fungsinya(masalah, tampung);
 }
 
 // ! JANGAN DIMODIFIKASI
